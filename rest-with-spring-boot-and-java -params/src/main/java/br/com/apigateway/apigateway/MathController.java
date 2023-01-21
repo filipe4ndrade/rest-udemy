@@ -1,7 +1,5 @@
 package br.com.apigateway.apigateway;
 
-import java.util.concurrent.atomic.AtomicLong;
-
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,6 +19,53 @@ public class MathController {
 		}
 
 		return convertToDouble(numberOne) + convertToDouble(numberTwo);
+	}
+
+	@RequestMapping(value = "/sub/{numberOne}/{numberTwo}", method = RequestMethod.GET)
+	public Double subtracao(@PathVariable(value = "numberOne") String numberOne,
+			@PathVariable(value = "numberTwo") String numberTwo) throws Exception {
+
+		if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
+			throw new UnsupportedMathOperationException("Please set a numeric value!");
+		}
+
+		return convertToDouble(numberOne) - convertToDouble(numberTwo);
+
+	}
+	
+	@RequestMapping(value = "/mult/{numberOne}/{numberTwo}", method = RequestMethod.GET)
+	public Double multiplicacao(@PathVariable(value = "numberOne") String numberOne,
+			@PathVariable(value = "numberTwo") String numberTwo) throws Exception {
+
+		if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
+			throw new UnsupportedMathOperationException("Please set a numeric value!");
+		}
+
+		return convertToDouble(numberOne) * convertToDouble(numberTwo);
+
+	}
+	
+	@RequestMapping(value = "/div/{numberOne}/{numberTwo}", method = RequestMethod.GET)
+	public Double divisao(@PathVariable(value = "numberOne") String numberOne,
+			@PathVariable(value = "numberTwo") String numberTwo) throws Exception {
+
+		if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
+			throw new UnsupportedMathOperationException("Please set a numeric value!");
+		}
+
+		return convertToDouble(numberOne) / convertToDouble(numberTwo);
+
+	}
+	
+	@RequestMapping(value = "/raiz2/{numberOne}", method = RequestMethod.GET)
+	public Double raizQuardada(@PathVariable(value = "numberOne") String numberOne) throws Exception {
+
+		if (!isNumeric(numberOne)) {
+			throw new UnsupportedMathOperationException("Please set a numeric value!");
+		}
+
+		return Math.sqrt(convertToDouble(numberOne));
+
 	}
 
 	private Double convertToDouble(String strNumber) {
