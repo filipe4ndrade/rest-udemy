@@ -1,4 +1,4 @@
-package br.com.apigateway.apigateway;
+package br.com.apigateway.controllers;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -6,30 +6,34 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.apigateway.apigateway.exceptions.UnsupportedMathOperationException;
+import br.com.apigateway.converters.NumberConvert;
+import br.com.apigateway.math.SimpleMath;
 
 @RestController
 public class MathController {
+	
+	private SimpleMath math = new SimpleMath();
 
 	@RequestMapping(value = "/sum/{numberOne}/{numberTwo}", method = RequestMethod.GET)
 	public Double sum(@PathVariable(value = "numberOne") String numberOne,
 			@PathVariable(value = "numberTwo") String numberTwo) throws Exception {
 
-		if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
+		if (!NumberConvert.isNumeric(numberOne) || !NumberConvert.isNumeric(numberTwo)) {
 			throw new UnsupportedMathOperationException("Please set a numeric value!");
 		}
 
-		return convertToDouble(numberOne) + convertToDouble(numberTwo);
+		return math.sum(NumberConvert.convertToDouble(numberOne), NumberConvert.convertToDouble(numberTwo));
 	}
 
 	@RequestMapping(value = "/sub/{numberOne}/{numberTwo}", method = RequestMethod.GET)
 	public Double subtracao(@PathVariable(value = "numberOne") String numberOne,
 			@PathVariable(value = "numberTwo") String numberTwo) throws Exception {
 
-		if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
+		if (!NumberConvert.isNumeric(numberOne) || !NumberConvert.isNumeric(numberTwo)) {
 			throw new UnsupportedMathOperationException("Please set a numeric value!");
 		}
 
-		return convertToDouble(numberOne) - convertToDouble(numberTwo);
+		return math.subtracao(NumberConvert.convertToDouble(numberOne), NumberConvert.convertToDouble(numberTwo));
 
 	}
 	
@@ -37,11 +41,11 @@ public class MathController {
 	public Double multiplicacao(@PathVariable(value = "numberOne") String numberOne,
 			@PathVariable(value = "numberTwo") String numberTwo) throws Exception {
 
-		if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
+		if (!NumberConvert.isNumeric(numberOne) || !NumberConvert.isNumeric(numberTwo)) {
 			throw new UnsupportedMathOperationException("Please set a numeric value!");
 		}
 
-		return convertToDouble(numberOne) * convertToDouble(numberTwo);
+		return math.multiplicacao(NumberConvert.convertToDouble(numberOne), NumberConvert.convertToDouble(numberTwo));
 
 	}
 	
@@ -49,40 +53,24 @@ public class MathController {
 	public Double divisao(@PathVariable(value = "numberOne") String numberOne,
 			@PathVariable(value = "numberTwo") String numberTwo) throws Exception {
 
-		if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
+		if (!NumberConvert.isNumeric(numberOne) || !NumberConvert.isNumeric(numberTwo)) {
 			throw new UnsupportedMathOperationException("Please set a numeric value!");
 		}
 
-		return convertToDouble(numberOne) / convertToDouble(numberTwo);
+		return math.divisao(NumberConvert.convertToDouble(numberOne), NumberConvert.convertToDouble(numberTwo));
 
 	}
 	
 	@RequestMapping(value = "/raiz2/{numberOne}", method = RequestMethod.GET)
 	public Double raizQuardada(@PathVariable(value = "numberOne") String numberOne) throws Exception {
 
-		if (!isNumeric(numberOne)) {
+		if (!NumberConvert.isNumeric(numberOne)) {
 			throw new UnsupportedMathOperationException("Please set a numeric value!");
 		}
 
-		return Math.sqrt(convertToDouble(numberOne));
+		return math.raizQuadrada(NumberConvert.convertToDouble(numberOne));
 
 	}
 
-	private Double convertToDouble(String strNumber) {
-		if (strNumber == null)
-			return 0D;
-
-		String number = strNumber.replaceAll(",", ".");
-		if (isNumeric(number))
-			return Double.parseDouble(number);
-		return 0D;
-	}
-
-	private boolean isNumeric(String strNumber) {
-		if (strNumber == null)
-			return false;
-		String number = strNumber.replaceAll(",", ".");
-		return number.matches("[-+]?[0-9]*\\.?[0-9]+");
-	}
-
+	
 }
