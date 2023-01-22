@@ -34,9 +34,9 @@ public class PersonServices {
 
 		Person person = new Person();
 		person.setId(counter.incrementAndGet());
-		person.setFirstName("Leandro");
-		person.setLastName("Costa");
-		person.setAddres("Uberlândia - Minas Gerais - Brasil");
+		person.setFirstName("Filipe");
+		person.setLastName("Andrade");
+		person.setAddres("Ipojuca - Pernambuco - Brasil");
 		person.setGender("Male");
 		return person;
 	}
