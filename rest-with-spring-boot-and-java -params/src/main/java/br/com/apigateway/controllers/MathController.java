@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.apigateway.apigateway.exceptions.UnsupportedMathOperationException;
 import br.com.apigateway.converters.NumberConvert;
+import br.com.apigateway.exceptions.UnsupportedMathOperationException;
 import br.com.apigateway.math.SimpleMath;
 
 @RestController

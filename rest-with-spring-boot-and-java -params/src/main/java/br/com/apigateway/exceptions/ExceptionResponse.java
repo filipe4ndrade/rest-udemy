@@ -1,4 +1,4 @@
-package br.com.apigateway.apigateway.exceptions;
+package br.com.apigateway.exceptions;
 
 import java.io.Serializable;
 import java.util.Date;
