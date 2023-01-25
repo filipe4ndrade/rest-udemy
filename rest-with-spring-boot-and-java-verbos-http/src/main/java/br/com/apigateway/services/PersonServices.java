@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.apigateway.data.vo.v1.PersonVO;
+import br.com.apigateway.data.vo.v2.PersonVO2;
 import br.com.apigateway.exceptions.ResourceNotFoundException;
 import br.com.apigateway.mapper.DozerMapper;
 import br.com.apigateway.model.Person;
@@ -41,6 +42,14 @@ public class PersonServices {
 		logger.info("Creating one person!");
 		var entity = DozerMapper.parserObject(person, Person.class);
 		var vo =  DozerMapper.parserObject(repository.save(entity), PersonVO.class);
+		return vo;
+	}
+	
+	public PersonVO2 createV2(PersonVO2 person) {
+
+		logger.info("Creating one person with V2!");
+		var entity = DozerMapper.parserObject(person, Person.class);
+		var vo =  DozerMapper.parserObject(repository.save(entity), PersonVO2.class);
 		return vo;
 	}
 	
