@@ -3,10 +3,15 @@ package br.com.apigateway.data.vo.v1;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class PersonVO implements Serializable {
+import org.springframework.hateoas.RepresentationModel;
+
+import com.github.dozermapper.core.Mapping;
+
+public class PersonVO extends RepresentationModel<PersonVO> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private Long id;
+	@Mapping("id")
+	private Long key;
 	private String firstName;
 	private String lastName;
 	private String addres;
@@ -16,12 +21,12 @@ public class PersonVO implements Serializable {
 
 	}
 
-	public Long getId() {
-		return id;
+	public Long getKey() {
+		return key;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setKey(Long key) {
+		this.key = key;
 	}
 
 	public String getFirstName() {
@@ -58,7 +63,7 @@ public class PersonVO implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(addres, firstName, gender, id, lastName);
+		return Objects.hash(addres, firstName, gender, key, lastName);
 	}
 
 	@Override
@@ -71,7 +76,7 @@ public class PersonVO implements Serializable {
 			return false;
 		PersonVO other = (PersonVO) obj;
 		return Objects.equals(addres, other.addres) && Objects.equals(firstName, other.firstName)
-				&& Objects.equals(gender, other.gender) && Objects.equals(id, other.id)
+				&& Objects.equals(gender, other.gender) && Objects.equals(key, other.key)
 				&& Objects.equals(lastName, other.lastName);
 	}
 
