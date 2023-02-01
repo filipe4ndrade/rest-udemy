@@ -32,9 +32,11 @@ public class BookController {
 	private BookServices service;
 
 	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-	@Operation(summary = "Finds all Book", description = "Finds all Book", tags = { "Book" }, responses = {
+	@Operation(summary = "Finds all Book", description = "Finds all Book", tags = { "Book" }, 
+	responses = {
 			@ApiResponse(description = "Sucess", responseCode = "200", content = {
-					@Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = BookVO.class))) }),
+					@Content(mediaType = "application/json", array = @ArraySchema(
+							schema = @Schema(implementation = BookVO.class))) }),
 			@ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
 			@ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
 			@ApiResponse(description = "Not Found", responseCode = "404", content = @Content),
@@ -44,8 +46,10 @@ public class BookController {
 	}
 
 	@GetMapping(value = "/{id}", produces = { MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
-	@Operation(summary = "Finds a Book", description = "Finds a Book", tags = { "Book" }, responses = {
-			@ApiResponse(description = "Sucess", responseCode = "204", content = @Content(schema = @Schema(implementation = BookVO.class))),
+	@Operation(summary = "Finds a Book", description = "Finds a Book", tags = { "Book" }, 
+	responses = {
+			@ApiResponse(description = "Sucess", responseCode = "204", content = 
+					@Content(schema = @Schema(implementation = BookVO.class))),
 			@ApiResponse(description = "No Content", responseCode = "400", content = @Content),
 			@ApiResponse(description = "Bad Request", responseCode = "400", content = @Content),
 			@ApiResponse(description = "Unauthorized", responseCode = "401", content = @Content),
