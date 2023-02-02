@@ -27,17 +27,10 @@ public class WebConfig implements WebMvcConfigurer {
 	// VIA HEADER PARAM http://localhost:8080/api/person/v1/1
 	// Em headers accept escolhe o parâmetro para o postman
 	
-	
-	
-	@Override
-	public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
-		// TODO Auto-generated method stub
-		configurer.favorParameter(false).ignoreAcceptHeader(false).useRegisteredExtensionsOnly(false)
-				.defaultContentType(MediaType.APPLICATION_JSON).mediaType("json", MediaType.APPLICATION_JSON)
-				.mediaType("xml", MediaType.APPLICATION_XML);
 
-	}
-
+	@Value("${cors.originPatterns:default}")
+	private String corsOriginPatterns = "";
+	
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
 		
@@ -48,5 +41,16 @@ public class WebConfig implements WebMvcConfigurer {
 		            .allowedOrigins(allowedOrigin)
 		            .allowCredentials(true);
 	}
+	
+	@Override
+	public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
+		// TODO Auto-generated method stub
+		configurer.favorParameter(false).ignoreAcceptHeader(false).useRegisteredExtensionsOnly(false)
+				.defaultContentType(MediaType.APPLICATION_JSON).mediaType("json", MediaType.APPLICATION_JSON)
+				.mediaType("xml", MediaType.APPLICATION_XML);
+
+	}
+
+	
 
 }

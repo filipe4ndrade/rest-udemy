@@ -1,10 +1,11 @@
-package br.com.apigateway.securityJwt;
+package br.com.apigateway.security;
 
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,9 +26,12 @@ import jakarta.servlet.http.HttpServletRequest;
 @Service
 public class JwtTokenProvider {
 
-	private String secretKey = "53cr37";
-	private long validityInMilliseconds = 3600000;
-
+	@Value("${security.jwt.token.secret-key:secret}")
+	private String secretKey = "secret";
+	
+	@Value("${security.jwt.token.expire-length:3600000}")
+	private long validityInMilliseconds = 3600000; // 1h
+	
 	@Autowired
 	private UserDetailsService userDetailsService;
 
